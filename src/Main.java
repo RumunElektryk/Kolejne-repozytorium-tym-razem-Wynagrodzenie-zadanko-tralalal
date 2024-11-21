@@ -1,71 +1,48 @@
-abstract class Employee {
-    protected String position;
-    protected double baseSalary;
-    protected int overtimeHours;
-    protected double hourlyRate;
-    protected double bonus;
-
-    public Employee(String position, double baseSalary, int overtimeHours, double hourlyRate, double bonus) {
-        this.position = position;
-        this.baseSalary = baseSalary;
-        this.overtimeHours = overtimeHours;
-        this.hourlyRate = hourlyRate;
-        this.bonus = bonus;
-    }
-    abstract double calculateSalary();
-    abstract void displayInfo();
+abstract class Marks{
+    public abstract double
+    getPercentage();
 }
+class A extends Marks{
+    private int subject1;
+    private int subject2;
+    private int subject3;
 
-class Manager extends Employee {
-
-    public Manager(double baseSalary, int overtimeHours, double hourlyRate, double bonus) {
-        super("Manager", baseSalary, overtimeHours, hourlyRate, bonus);
+    public A(int subject1, int subject2, int subject3){
+        this.subject1 = subject1;
+        this.subject2 = subject2;
+        this.subject3 = subject3;
     }
-
     @Override
-    double calculateSalary() {
-        return baseSalary + (overtimeHours * hourlyRate) + bonus;
+    public double getPercentage(){
+        double total1 = subject1 + subject2 + subject3;
+        return ( total1 / 300) * 100;
     }
+    static class B extends Marks{
+        private int subject1;
+        private int subject2;
+        private int subject3;
+        private int subject4;
 
-    @Override
-    void displayInfo() {
-        System.out.println("Stanowisko: " + position);
-        System.out.println("Podstawowa płaca: " + baseSalary);
-        System.out.println("Nadgodziny: " + overtimeHours);
-        System.out.println("Stawka godzinowa: " + hourlyRate);
-        System.out.println("Premia: " + bonus);
-        System.out.println("Wynagrodzenie: " + calculateSalary());
+        public B(int subject1, int subject2, int subject3, int subject4){
+            this.subject1 = subject1;
+            this.subject2 = subject2;
+            this.subject3 = subject3;
+            this.subject4 = subject4;
+
+        }
+        @Override
+        public double getPercentage(){
+            double total1 = subject1 + subject2 + subject3 + subject4;
+            return (total1 / 400) * 100;
+
+        }
+
     }
-}
-
-class Programmer extends Employee {
-
-    public Programmer(double baseSalary, int overtimeHours, double hourlyRate, double bonus) {
-        super("Programmer", baseSalary, overtimeHours, hourlyRate, bonus);
-    }
-
-    @Override
-    double calculateSalary() {
-        return baseSalary + (overtimeHours * hourlyRate) + bonus;
-    }
-
-    @Override
-    void displayInfo() {
-        System.out.println("Stanowisko: " + position);
-        System.out.println("Podstawowa płaca: " + baseSalary);
-        System.out.println("Nadgodziny: " + overtimeHours);
-        System.out.println("Stawka godzinowa: " + hourlyRate);
-        System.out.println("Premia: " + bonus);
-        System.out.println("Wynagrodzenie: " + calculateSalary());
-    }
-}
-
-public class Main {
     public static void main(String[] args) {
-        Employee manager = new Manager(5000, 10, 100, 2000);
-        manager.displayInfo();
+        A studentA = new A(80, 90, 95);
+        System.out.println("Procent zdobytych punktów przez studenta A " + studentA.getPercentage()+"%");
+        B studentB  = new B(78, 82, 88, 95);
+        System.out.println("Liczba zdobytych procentów przez studenta B " + studentB.getPercentage()+"%");
 
-        Employee programmer = new Programmer(4000, 15, 80, 1500);
-        programmer.displayInfo();
     }
 }
